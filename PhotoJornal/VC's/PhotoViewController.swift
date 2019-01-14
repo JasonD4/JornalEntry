@@ -10,6 +10,13 @@ import UIKit
 
 class PhotoViewController: UIViewController {
     
+    var post = [PictureModel](){
+        didSet{
+            self.PhotoJornalEntries.reloadData()
+        }
+    }
+    
+    
     @IBOutlet weak var NewLogOutput: UIBarButtonItem!
     
 
@@ -17,11 +24,42 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        PhotoJornalEntries.dataSource = self
+        PhotoJornalEntries.delegate = self
 
     }
 
     @IBAction func NewLog(_ sender: UIBarButtonItem) {
+        
     }
     
 }
 
+
+
+extension PhotoViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return post.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCells", for: indexPath) as? PhotoCells else{return UICollectionViewCell()}
+        
+        cell.JornalEntry.text = post[indexPath.row].description
+        cell.DateOfEntry.text = post[indexPath.row].createdAt
+        
+        
+//        cell.PersonPicture.image =
+        
+        
+        return cell
+    }
+    
+    
+}
+
+extension PhotoViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 250, height: 300)
+    }
+}

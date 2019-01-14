@@ -20,7 +20,7 @@ class PhotoDetailViewController: UIViewController {
     }
     
     @IBAction func Dismiss(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)3
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func SavePost(_ sender: UIBarButtonItem) {
