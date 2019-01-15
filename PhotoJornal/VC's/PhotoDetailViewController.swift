@@ -18,6 +18,11 @@ class PhotoDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    func savePost(image: UIImage, text: UITextField, date: Date){
+        if let imageSave = image.jpegData(compressionQuality: 0.5){
+            let userEntry = PictureModel.init(createdAt: "\(date)", imageData: imageSave, description: "\(text)")
+        }
+    }
     
     @IBAction func Dismiss(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)

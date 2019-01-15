@@ -26,11 +26,16 @@ class PhotoViewController: UIViewController {
         super.viewDidLoad()
         PhotoJornalEntries.dataSource = self
         PhotoJornalEntries.delegate = self
+        post = PhotoHelpers.loadTheEntry() ?? [PictureModel]()
 
     }
 
     @IBAction func NewLog(_ sender: UIBarButtonItem) {
-        
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        guard let vc = storyBoard.instantiateViewController(withIdentifier: "PhotoDetail") as? PhotoDetailViewController else {return}
+        vc.modalPresentationStyle = .overCurrentContext
+        present( vc, animated: true)
+
     }
     
 }

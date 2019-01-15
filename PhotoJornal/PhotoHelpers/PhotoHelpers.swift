@@ -10,7 +10,7 @@ import Foundation
 
 final class PhotoHelpers{
     
-    private static let storePost = "AllUserEntries"
+    private static let storePost = "AllUserEntries.plist"
     private static var picturePost: [PictureModel]?
     private init() {}
     
