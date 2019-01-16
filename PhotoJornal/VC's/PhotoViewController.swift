@@ -26,7 +26,15 @@ class PhotoViewController: UIViewController {
         super.viewDidLoad()
         PhotoJornalEntries.dataSource = self
         PhotoJornalEntries.delegate = self
-        post = PhotoHelpers.loadTheEntry() ?? [PictureModel]()
+        post = PhotoHelpers.loadTheEntry()
+        
+        print(DataPersistenceHelper.documentsDirectory())
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.PhotoJornalEntries.reloadData()
 
     }
 
@@ -35,7 +43,6 @@ class PhotoViewController: UIViewController {
         guard let vc = storyBoard.instantiateViewController(withIdentifier: "PhotoDetail") as? PhotoDetailViewController else {return}
         vc.modalPresentationStyle = .overCurrentContext
         present( vc, animated: true)
-
     }
     
 }

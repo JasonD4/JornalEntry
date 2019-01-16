@@ -11,10 +11,11 @@ import Foundation
 final class PhotoHelpers{
     
     private static let storePost = "AllUserEntries.plist"
-    private static var picturePost: [PictureModel]?
+    private static var picturePost = [PictureModel]()
     private init() {}
     
-    static func saveTheEntry(typeOfFileSaving: [PictureModel]){
+    static func saveTheEntry(typeOfFileSaving: PictureModel){
+        picturePost.append(typeOfFileSaving)
         
         let pathToSaveTo = DataPersistenceHelper.filepathToDocumentDirectory(filename: storePost)
         do{
@@ -24,13 +25,13 @@ final class PhotoHelpers{
             print("error in the static function saveTheEntry: \(error)")
         }
     }
-    static func loadTheEntry() -> [PictureModel]?{
+    static func loadTheEntry() -> [PictureModel]{
         
         let path = DataPersistenceHelper.filepathToDocumentDirectory(filename: storePost).path
         if FileManager.default.fileExists(atPath: path){
             if let data = FileManager.default.contents(atPath: path){
                 do{// [phototJornal]
-                    picturePost = try PropertyListDecoder().decode([PictureModel].self, from: data)
+                picturePost = try PropertyListDecoder().decode([PictureModel].self, from: data)
                 }catch{
                     print(error)
                 }
