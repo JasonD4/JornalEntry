@@ -14,9 +14,17 @@ final class PhotoHelpers{
     private static var picturePost = [PictureModel]()
     private init() {}
     
-    static func saveTheEntry(typeOfFileSaving: PictureModel){
-        picturePost.append(typeOfFileSaving)
-        
+    static func removing(index:Int){
+        picturePost.remove(at: index)
+        saveTheEntry()
+    }
+    static func appening(type : PictureModel){
+        picturePost.append(type)
+        saveTheEntry()
+    }
+    
+    static func saveTheEntry(){
+
         let pathToSaveTo = DataPersistenceHelper.filepathToDocumentDirectory(filename: storePost)
         do{
             let photoData = try PropertyListEncoder().encode(picturePost)
@@ -45,4 +53,28 @@ final class PhotoHelpers{
         return picturePost
     }
     
+//    public func dateObtainer() -> String{
+//        var dateReturner = String()
+//        
+//        public var dateFormattedString: String {
+//            let isoDateFormatter = ISO8601DateFormatter()
+//            var formattedDate = createdAt
+//            if let date = isoDateFormatter.date(from: createdAt) {
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "MMMM d, yyyy hh:mm a"
+//                formattedDate = dateFormatter.string(from: date)
+//            }
+//            return formattedDate
+//        }
+//        public var date: Date {
+//            let isoDateFormatter = ISO8601DateFormatter()
+//            var formattedDate = Date()
+//            if let date = isoDateFormatter.date(from: createdAt) {
+//                formattedDate = date
+//            }
+//            return formattedDate
+//        }
+//        return dateReturner
+//    }
+
 }

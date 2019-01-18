@@ -16,7 +16,7 @@ class PhotoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-setupImagePickerViewController()
+        setupImagePickerViewController()
         // Do any additional setup after loading the view.
     }
     func savePost(image: UIImage, text: String, date: String){
@@ -25,7 +25,9 @@ setupImagePickerViewController()
             
             let userEntry = PictureModel.init(createdAt: "no date", imageData: imageSave, description: PostText.text)
             
-            PhotoHelpers.saveTheEntry(typeOfFileSaving: userEntry)
+            PhotoHelpers.appening(type:userEntry)
+            
+            
         }
     }
     private func showImageSelect (){
@@ -37,8 +39,7 @@ setupImagePickerViewController()
     
     @IBAction func SavePost(_ sender: UIBarButtonItem) {
         savePost(image: Picture.image ?? UIImage.init(contentsOfFile: "placeholder")!, text: PostText?.text ?? "" , date: "no date")
-        
-        // i do not know if this works twice
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -66,7 +67,6 @@ extension PhotoDetailViewController: UIImagePickerControllerDelegate, UINavigati
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             Picture.image = image
-//            savePhotoJornal(image: image)
         }
         else{
             print("original Image is nil")

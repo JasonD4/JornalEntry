@@ -8,12 +8,16 @@
 
 import UIKit
 
+
 class PhotoCells: UICollectionViewCell {
     
     @IBOutlet weak var PersonPicture: UIImageView!
     @IBOutlet weak var JornalEntry: UILabel!
     @IBOutlet weak var DateOfEntry: UILabel!
-    
-    
     @IBOutlet weak var Options: UIButton!
+    
+
+
+    
+    
 }
