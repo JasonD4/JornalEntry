@@ -14,6 +14,14 @@ final class PhotoHelpers{
     private static var picturePost = [PictureModel]()
     private init() {}
     
+    static func time() -> String{
+        let currentDateTime = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .long
+        return formatter.string(from: currentDateTime)
+    }
+    
     static func removing(index:Int){
         picturePost.remove(at: index)
         saveTheEntry()
@@ -22,7 +30,15 @@ final class PhotoHelpers{
         picturePost.append(type)
         saveTheEntry()
     }
-    
+    static func replacing(post:PictureModel){        
+        let index = picturePost.firstIndex { $0.id == post.id }
+        if let foundIndex = index {
+            picturePost[foundIndex] = post
+        } else {
+            print("index not found")
+        }
+        saveTheEntry()
+    }
     static func saveTheEntry(){
 
         let pathToSaveTo = DataPersistenceHelper.filepathToDocumentDirectory(filename: storePost)

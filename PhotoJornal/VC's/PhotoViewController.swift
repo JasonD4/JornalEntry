@@ -39,7 +39,6 @@ class PhotoViewController: UIViewController {
         post = PhotoHelpers.loadTheEntry()
         self.PhotoJornalEntries.reloadData()
     }
-
     
     @IBAction func NewLog(_ sender: UIBarButtonItem) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -57,7 +56,12 @@ class PhotoViewController: UIViewController {
             self.PhotoJornalEntries.reloadData()
             })
         alert.addAction(UIAlertAction.init(title: "edit", style: .destructive) {(edit) in
-            self.NewLog(UIBarButtonItem())
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+            guard let vc = storyBoard.instantiateViewController(withIdentifier: "PhotoDetail") as? PhotoDetailViewController else {return}
+            vc.photo = self.post[sender.tag]
+            vc.isEditingPictureModel = true
+            self.present(vc, animated: true)
+            //vc.savepostoutlet.tag = sender.tag
             })
         alert.addAction(UIAlertAction.init(title: "cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -82,6 +86,7 @@ extension PhotoViewController: UICollectionViewDataSource{
         cell.DateOfEntry.text = post[indexPath.row].createdAt
         cell.PersonPicture.image = UIImage.init(data: post[indexPath.row].imageData)
         cell.Options.tag = indexPath.row
+        
      return cell
     }
     

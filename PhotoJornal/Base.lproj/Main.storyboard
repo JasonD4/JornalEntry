@@ -199,6 +199,7 @@
                     <connections>
                         <outlet property="Picture" destination="6xV-N9-fY3" id="nJj-Xi-pl4"/>
                         <outlet property="PostText" destination="flx-EA-jZT" id="QH2-g4-lZB"/>
+                        <outlet property="savepostoutlet" destination="zHu-Eq-fPl" id="Uxf-fS-OY1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMQ-fk-uZs" userLabel="First Responder" sceneMemberID="firstResponder"/>

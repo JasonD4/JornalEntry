@@ -9,8 +9,9 @@
 import Foundation
 
 
-struct PictureModel: Codable{
+struct PictureModel: Codable,Equatable {
     let createdAt: String
     let imageData: Data
     let description: String
+    let id: String
 }
